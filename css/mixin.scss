@@ -1,0 +1,69 @@
+@mixin center {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+%center{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+@mixin top-bottom {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+
+@mixin left-right {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+
+@mixin cube($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin circle($size:40px) {
+  @include cube($size);
+  -webkit-border-radius:50%;
+  -moz-border-radius:50%;
+  border-radius: 50%;
+  @content;
+}
+
+$m-size:1070px;
+@mixin onm {
+  @media screen and (max-width:$m-size){
+    @content;
+  }
+}
+$s-size:736px;
+@mixin ons {
+  @media screen and (max-width:$s-size){
+    @content;
+  }
+}
+
+@mixin userem($design-size){
+  $device-size-list:$design-size,414px,412px,380px,375px,360px,320px;
+  @each $size in $device-size-list{
+    @media screen and (max-width: #{$size}) {
+      html{
+        font-size: 100px*$size/$design-size;
+      }
+    }
+  }
+}
